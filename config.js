@@ -79,8 +79,8 @@ window.CONFIG = {
   // A posição pode ser alterada no editor ?editor=1.
   botoesVoltar: {
     presentes: { mostrarTexto:false, posicao: {"left":31.712773312699678,"top":93.90507341119181,"width":35.74440270567093,"height":4.273875856144915} },
-    manual: { mostrarTexto:true, posicao: {"left":35.393290734824284,"top":90.22266642154274,"width":28.383399061501596,"height":3.353276166430366} },
-    contagem: { mostrarTexto:true, posicao: {"left":30.48593937200479,"top":91.94879056539783,"width":37.78914674021566,"height":4.043729774752007} }
+    manual: { mostrarTexto:false, posicao: {"left":35.393290734824284,"top":90.22266642154274,"width":28.383399061501596,"height":3.353276166430366} },
+    contagem: { mostrarTexto:false, posicao: {"left":30.48593937200479,"top":91.94879056539783,"width":37.78914674021566,"height":4.043729774752007} }
   },
 
   // ----- POSIÇÃO DOS BOTÕES NA TELA PRINCIPAL ----------------------------
@@ -94,6 +94,7 @@ window.CONFIG = {
         gift: { left:66.46063047811518, top:60.1099680847421, width:19.567092651757186, height:11.52034966267883 },
         manual: { left:25.76906368406491, top:76.46142454156453, width:19.292465283626143, height:11.399863780795407 },
         countdown: { left:53.783320424201435, top:75.87521609668785, width:19.567092651757186, height:11.52034966267883 }
+    }
   },
 
   // ----- CONTAGEM REGRESSIVA ---------------------------------------------
