@@ -51,10 +51,10 @@
     #videoScreen{--bg-img:url('assets/principal.webp')}
     #videoPlayer{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;background:#000}
     .hotspot{position:absolute;border:0;background:transparent;cursor:pointer;z-index:5}
-    .countdown-box{position:absolute;z-index:5;display:flex;align-items:center;justify-content:center;gap:2.2%;padding:2%;text-align:center;color:var(--count-number,#fff);font-variant-numeric:tabular-nums}
-    .countdown-item{min-width:16%;text-shadow:0 2px 8px rgba(0,0,0,.48)}
-    .countdown-value{display:block;font-size:clamp(22px,5.3vw,50px);font-weight:900;line-height:1}
-    .countdown-label{display:block;margin-top:6px;font-size:clamp(8px,1.9vw,14px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--count-label,#fff)}
+    .countdown-box{position:absolute;z-index:5;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;justify-items:center;column-gap:var(--count-gap,8px);padding:var(--count-padding,8px);text-align:center;color:var(--count-number,#fff);font-variant-numeric:tabular-nums;overflow:visible}
+    .countdown-item{width:100%;min-width:0;text-shadow:0 2px 8px rgba(0,0,0,.48);display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .countdown-value{display:block;font-size:var(--count-value-size,34px);font-weight:900;line-height:1;white-space:nowrap}
+    .countdown-label{display:block;margin-top:var(--count-label-gap,5px);font-size:var(--count-label-size,11px);font-weight:800;line-height:1.15;letter-spacing:.08em;text-transform:uppercase;color:var(--count-label,#fff);white-space:nowrap}
     .countdown-message{font-size:clamp(18px,4.4vw,38px);font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.48)}
     body.editor-on .countdown-box{background:rgba(255,170,40,.22);outline:2px solid rgba(255,255,255,.95);border-radius:10px}
     body.editor-on .countdown-box::before{content:"Contador";position:absolute;left:6px;top:6px;background:#fff;color:#7b3650;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;box-shadow:0 2px 8px #0004}
@@ -247,6 +247,13 @@
         musica: Object.assign({ volume:0.30 }, CFG.musica || {})
       };
 
+      // Compatibilidade: aceita "contagem" ou "countdown" dentro de hotspots.
+      // O nome oficial usado pela Engine é "countdown".
+      if(C.hotspots.contagem && !C.hotspots.countdown){
+        C.hotspots.countdown = C.hotspots.contagem;
+      }
+      delete C.hotspots.contagem;
+
       // ---- APLICAÇÃO DO CONFIG NO DOM ------------------------------------
       document.title = "Convite " + C.nome;
       const themeMeta = document.querySelector('meta[name="theme-color"]');
@@ -366,7 +373,31 @@
           el.style.width = v.width + "%"; el.style.height = v.height + "%";
         });
         applyBackText();
+        updateCountdownScale();
         exportAreas();
+      }
+
+      function updateCountdownScale(){
+        const box = $("countdownBox");
+        if(!box || !document.body.contains(box)) return;
+
+        const rect = box.getBoundingClientRect();
+        if(!rect.width || !rect.height) return;
+
+        // Escala tipografia e espaçamentos proporcionalmente ao próprio bloco.
+        // Assim, ao diminuir o contador no editor, tudo reduz junto sem se sobrepor.
+        const cellWidth = rect.width / 5;
+        const valueSize = Math.max(9, Math.min(cellWidth * 0.47, rect.height * 0.42));
+        const labelSize = Math.max(5, Math.min(cellWidth * 0.17, rect.height * 0.14));
+        const gap = Math.max(2, Math.min(cellWidth * 0.08, 10));
+        const labelGap = Math.max(2, Math.min(rect.height * 0.045, 7));
+        const padding = Math.max(2, Math.min(rect.height * 0.055, 10));
+
+        box.style.setProperty("--count-value-size", valueSize + "px");
+        box.style.setProperty("--count-label-size", labelSize + "px");
+        box.style.setProperty("--count-gap", gap + "px");
+        box.style.setProperty("--count-label-gap", labelGap + "px");
+        box.style.setProperty("--count-padding", padding + "px");
       }
 
       const buildScreens = ()=>{
@@ -383,11 +414,18 @@
       const video = $("videoPlayer");
       const music = $("music");
 
+      if(window.ResizeObserver && $("countdownBox")){
+        const countdownResizeObserver = new ResizeObserver(updateCountdownScale);
+        countdownResizeObserver.observe($("countdownBox"));
+      }
+      window.addEventListener("resize", updateCountdownScale);
+
       function show(id){
         screens.forEach(s=>{ if(s) s.classList.remove("active","fade-in","fade-out"); });
         const next = $(id); if(!next) return;
         next.classList.add("active");
         if(id === "mainScreen") next.classList.add("fade-in");
+        if(id === "countdownScreen") requestAnimationFrame(updateCountdownScale);
       }
 
       // ---- MÚSICA (desbloqueio no toque, compatível com iPhone) ----------

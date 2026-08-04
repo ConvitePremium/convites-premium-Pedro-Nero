@@ -91,13 +91,16 @@ window.CONFIG = {
         map: { left:40.491117772523374, top:59.54541978412351, width:19.292465283626143, height:11.399863780795407 },
         gift: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 },
         manual: { left:40.491117772523374, top:59.54541978412351, width:19.292465283626143, height:11.399863780795407 },
-        contagem: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 }
+        countdown: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 }
   },
 
   // ----- CONTAGEM REGRESSIVA ---------------------------------------------
   // Formato da data: ANO-MÊS-DIAT HORA:MINUTO:SEGUNDO (sem espaço antes do T).
   // Exemplo: "2026-10-03T16:00:00"
   // A posição pode ser ajustada no editor escolhendo "Contador (na tela)".
+  // corNumero altera somente a cor dos números.
+  // corLegenda altera a cor de Meses, Dias, Horas, Min e Seg.
+  // Aceita hexadecimal, nome de cor ou rgb().
   contagem: {
     dataEvento: "2026-09-07T17:30:00",
     textoFinal: "A festa começou!",

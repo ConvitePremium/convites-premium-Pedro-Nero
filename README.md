@@ -67,3 +67,11 @@ A opção **Mostrar texto “Voltar”** pode ser desmarcada. O texto e o visual
 ## Manual do Convidado
 
 Para usar esta tela, coloque sua arte em `assets/manual.webp` e deixe `manual: true` dentro de `telas` no `config.js`. A área do botão e o botão Voltar podem ser ajustados em `?editor=1`.
+
+## Ajustes da contagem regressiva
+
+- O botão da contagem usa o hotspot `countdown`.
+- A Engine também aceita `contagem` por compatibilidade.
+- A cor dos números é alterada em `contagem.corNumero` no `config.js`.
+- A cor das legendas é alterada em `contagem.corLegenda`.
+- O contador redimensiona números, legendas e espaçamentos proporcionalmente ao bloco, evitando sobreposição.
