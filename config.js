@@ -30,7 +30,7 @@ window.CONFIG = {
   //         Ex.: 55 (Brasil) + 31 (DDD) + 985657116 -> "5531985657116"
   // mensagem: texto que já vem pré-preenchido quando a pessoa abre o WhatsApp.
   whatsapp: {
-    numero: "5588988281435",
+    numero: "5588999928284",
     mensagem: "Olá! Confirmo minha presença no aniversário do Pedro Nero."
   },
 
