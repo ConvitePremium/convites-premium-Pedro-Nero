@@ -107,7 +107,7 @@ window.CONFIG = {
     dataEvento: "2026-09-07T17:30:00",
     textoFinal: "A festa começou!",
     corNumero: "#330099",
-    corLegenda: "#FFCC00",
+    corLegenda: "#FFDEAD",
     posicao: { left:17.405747678714057, top:50.41656897266649, width:63.96165510183707, height:13.123130085037458 }
   },
 
