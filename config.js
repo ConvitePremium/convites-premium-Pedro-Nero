@@ -78,7 +78,9 @@ window.CONFIG = {
   // mostrarTexto: true mostra “Voltar”; false deixa apenas a área clicável.
   // A posição pode ser alterada no editor ?editor=1.
   botoesVoltar: {
-    presentes: { mostrarTexto:false, posicao: {"left":30.690409095447283,"top":90.91313045553281,"width":38.811495357428115,"height":5.6547699035228405} }
+    presentes: { mostrarTexto:false, posicao: {"left":31.712773312699678,"top":93.90507341119181,"width":35.74440270567093,"height":4.273875856144915} },
+    manual: { mostrarTexto:true, posicao: {"left":35.393290734824284,"top":90.22266642154274,"width":28.383399061501596,"height":3.353276166430366} },
+    contagem: { mostrarTexto:true, posicao: {"left":30.48593937200479,"top":91.94879056539783,"width":37.78914674021566,"height":4.043729774752007} }
   },
 
   // ----- POSIÇÃO DOS BOTÕES NA TELA PRINCIPAL ----------------------------
@@ -87,11 +89,11 @@ window.CONFIG = {
   //   left/top: canto superior esquerdo do botão
   //   width/height: tamanho do botão
     hotspots: {
-        confirm: { left:13.385800780551847, top:59.66051059081367, width:19.64355312204473, height:11.449252034014982 },
-        map: { left:40.491117772523374, top:59.54541978412351, width:19.292465283626143, height:11.399863780795407 },
-        gift: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 },
-        manual: { left:40.491117772523374, top:59.54541978412351, width:19.292465283626143, height:11.399863780795407 },
-        countdown: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 }
+        confirm: { left:13.181315457069418, top:60.46603504495421, width:19.64355312204473, height:11.449252034014982 },
+        map: { left:39.877708602195895, top:60.23587558732271, width:19.292465283626143, height:11.399863780795407 },
+        gift: { left:66.46063047811518, top:60.1099680847421, width:19.567092651757186, height:11.52034966267883 },
+        manual: { left:25.76906368406491, top:76.46142454156453, width:19.292465283626143, height:11.399863780795407 },
+        countdown: { left:53.783320424201435, top:75.87521609668785, width:19.567092651757186, height:11.52034966267883 }
   },
 
   // ----- CONTAGEM REGRESSIVA ---------------------------------------------
@@ -104,14 +106,10 @@ window.CONFIG = {
   contagem: {
     dataEvento: "2026-09-07T17:30:00",
     textoFinal: "A festa começou!",
-    corNumero: "#ffffff",
-    corLegenda: "#ffffff",
-    posicao: {
-      left: 8,
-      top: 48,
-      width: 84,
-      height: 16
-    }
+    corNumero: "#330099",
+    corLegenda: "#FFCC00",
+    posicao: { left:17.405747678714057, top:50.41656897266649, width:63.96165510183707, height:13.123130085037458 }
+  }
   },
 
   // ----- MÚSICA DE FUNDO -------------------------------------------------
