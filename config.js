@@ -37,7 +37,7 @@ window.CONFIG = {
   // ----- LOCALIZAÇÃO (BOTÃO MAPA) ----------------------------------------
   // Link completo do Google Maps. Abra o local no Maps, clique em "Compartilar"
   // -> "Copiar link" e cole aqui (mantenha as aspas).
-  mapa: "google.com/maps/place/Travessuras+Buffet/data=!4m2!3m1!1s0x0:0xd6c4b02555c3a45a?sa=X&ved=1t:2428&ictx=111",
+  mapa: "https://maps.app.goo.gl/dwfzUT3RpBcZxnLu5",
 
   // ----- QUAIS TELAS APARECEM --------------------------------------------
   // video:     true  -> toca o vídeo (assets/video.mp4) depois da abertura.
