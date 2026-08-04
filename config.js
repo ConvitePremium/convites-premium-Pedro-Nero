@@ -23,21 +23,21 @@ window.CONFIG = {
   // ----- IDENTIDADE DO CONVITE -------------------------------------------
   // Nome do aniversariante. Aparece no título da aba do navegador e nos
   // textos automáticos do convite.
-  nome: "Liz",
+  nome: "Pedro Nero",
 
   // ----- WHATSAPP (CONFIRMAR PRESENÇA) -----------------------------------
   // numero: DDI + DDD + número, SÓ DÍGITOS (sem +, espaço, parênteses ou traço).
   //         Ex.: 55 (Brasil) + 31 (DDD) + 985657116 -> "5531985657116"
   // mensagem: texto que já vem pré-preenchido quando a pessoa abre o WhatsApp.
   whatsapp: {
-    numero: "5511968658529",
-    mensagem: "Olá! Confirmo minha presença no aniversário da Liz."
+    numero: "5588988281435",
+    mensagem: "Olá! Confirmo minha presença no aniversário do Pedro Nero."
   },
 
   // ----- LOCALIZAÇÃO (BOTÃO MAPA) ----------------------------------------
   // Link completo do Google Maps. Abra o local no Maps, clique em "Compartilar"
   // -> "Copiar link" e cole aqui (mantenha as aspas).
-  mapa: "https://www.google.com/maps/@-23.451182,-46.5805723,3a,75y,60.02h,65.83t/data=!3m7!1e1!3m5!1svurXXU26dTFJo_HwDhBH-w!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D24.169645649598294%26panoid%3DvurXXU26dTFJo_HwDhBH-w%26yaw%3D60.02452636468114!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MDcyMC4wIKXMDSoASAFQAw%3D%3D",
+  mapa: "google.com/maps/place/Travessuras+Buffet/data=!4m2!3m1!1s0x0:0xd6c4b02555c3a45a?sa=X&ved=1t:2428&ictx=111",
 
   // ----- QUAIS TELAS APARECEM --------------------------------------------
   // video:     true  -> toca o vídeo (assets/video.mp4) depois da abertura.
@@ -50,8 +50,8 @@ window.CONFIG = {
     localizacao: true,
     presentes: true,
     dresscode: false,
-    manual: false,
-    contagem: false
+    manual: true,
+    contagem: true
   },
 
   // ----- TEXTOS DOS BOTÕES -----------------------------------------------
@@ -89,7 +89,9 @@ window.CONFIG = {
     hotspots: {
         confirm: { left:13.385800780551847, top:59.66051059081367, width:19.64355312204473, height:11.449252034014982 },
         map: { left:40.491117772523374, top:59.54541978412351, width:19.292465283626143, height:11.399863780795407 },
-        gift: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 }
+        gift: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 },
+        manual: { left:40.491117772523374, top:59.54541978412351, width:19.292465283626143, height:11.399863780795407 },
+        contagem: { left:66.8695855250401, top:59.53459410174959, width:19.567092651757186, height:11.52034966267883 }
   },
 
   // ----- CONTAGEM REGRESSIVA ---------------------------------------------
