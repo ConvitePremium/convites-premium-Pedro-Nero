@@ -13,23 +13,23 @@
        link do repositório (URL_BASE abaixo). O resto da engine é automático.
        ==================================================================== -->
   <meta name="theme-color" content="#f6c1cd">
-  <title>Convite Pedro Nero 1 aninho</title>
+  <title>Convite 1 aninho Julia</title>
 
   <!-- Cole aqui a URL base do convite publicado no GitHub Pages -->
   <!-- Ex.: https://convitepremium.github.io/convite-premium-Joao/ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Convite Pedro Nero 1 aninho">
+  <meta property="og:title" content="Convite 1 aninho Julia">
   <meta property="og:description" content="Clique para abrir o convite">
-  <meta property="og:url" content="https://convitepremium.github.io/convites-premium-Pedro-Nero/">
-  <meta property="og:image" content="https://convitepremium.github.io/convites-premium-Pedro-Nero/assets/preview-whatsapp.jpg">
-  <meta property="og:image:secure_url" content="https://convitepremium.github.io/convites-premium-Pedro-Nero/assets/preview-whatsapp.jpg">
+  <meta property="og:url" content="https://convitepremium.github.io/convites-premium-Julia-1ano/">
+  <meta property="og:image" content="https://convitepremium.github.io/convites-premium-Julia-1ano/assets/preview-whatsapp.jpg">
+  <meta property="og:image:secure_url" content="https://convitepremium.github.io/convites-premium-Julia-1ano/assets/preview-whatsapp.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Convite Pedro Nero 1 aninho">
+  <meta name="twitter:title" content="Convite 1 aninho Julia">
   <meta name="twitter:description" content="Clique para abrir o convite">
-  <meta name="twitter:image" content="https://convitepremium.github.io/convites-premium-Pedro-Nero/assets/preview-whatsapp.jpg">
+  <meta name="twitter:image" content="https://convitepremium.github.io/convites-premium-Julia-1ano/assets/preview-whatsapp.jpg">
   <!-- Fim do bloco de preview -->
 
   <link rel="preload" href="assets/opening.webp" as="image">
@@ -51,6 +51,9 @@
     #videoScreen{--bg-img:url('assets/principal.webp')}
     #videoPlayer{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;background:#000}
     .hotspot{position:absolute;border:0;background:transparent;cursor:pointer;z-index:5}
+    .pix-copy{position:absolute;border:0;background:transparent;cursor:pointer;z-index:6}
+    .copy-toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%) translateY(12px);z-index:50;background:rgba(0,0,0,.84);color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:.2s ease;white-space:nowrap}
+    .copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     .countdown-box{position:absolute;z-index:5;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;justify-items:center;column-gap:var(--count-gap,8px);padding:var(--count-padding,8px);text-align:center;color:var(--count-number,#fff);font-variant-numeric:tabular-nums;overflow:visible}
     .countdown-item{width:100%;min-width:0;text-shadow:0 2px 8px rgba(0,0,0,.48);display:flex;flex-direction:column;align-items:center;justify-content:center}
     .countdown-value{display:block;font-size:var(--count-value-size,34px);font-weight:900;line-height:1;white-space:nowrap}
@@ -78,6 +81,11 @@
     body.editor-on .hotspot::after{content:attr(data-label);position:absolute;left:6px;top:6px;background:#fff;color:#7b3650;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;box-shadow:0 2px 8px #0004;white-space:nowrap}
     body.editor-on .hotspot.selected{background:rgba(50,180,255,.28);outline:3px solid #fff}
     body.editor-on .hotspot .resize{position:absolute;right:-7px;bottom:-7px;width:18px;height:18px;background:#fff;border:2px solid #7b3650;border-radius:50%;box-shadow:0 2px 8px #0006}
+    /* PIX: hotspot independente e visível somente no editor */
+    body.editor-on .pix-copy{background:rgba(255,170,40,.28);outline:2px solid rgba(255,255,255,.95);border-radius:10px;z-index:11}
+    body.editor-on .pix-copy::after{content:attr(data-label);position:absolute;left:6px;top:6px;background:#fff;color:#7b3650;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;box-shadow:0 2px 8px #0004;white-space:nowrap}
+    body.editor-on .pix-copy.selected{background:rgba(50,180,255,.32);outline:3px solid #fff}
+    body.editor-on .pix-copy .resize{position:absolute;right:-7px;bottom:-7px;width:18px;height:18px;background:#fff;border:2px solid #7b3650;border-radius:50%;box-shadow:0 2px 8px #0006}
     .editor-panel{
   display:none;
   position:fixed;
@@ -130,6 +138,7 @@
     <section id="giftScreen" class="screen" aria-label="Sugestões de presentes">
       <div class="stage" id="giftStage">
         <img class="art" src="assets/presentes.webp" alt="Sugestões de presentes" loading="lazy" width="941" height="1672">
+        <button class="pix-copy" id="pixCopyBtn" data-key="pix" data-label="PIX (copiar chave)" aria-label="Copiar chave PIX"></button>
         <button class="back" id="backBtn" data-key="backGift" data-label="Voltar — Presentes">Voltar</button>
       </div>
     </section>
@@ -162,6 +171,7 @@
       </div>
     </section>
   </main>
+  <div class="copy-toast" id="copyToast" role="status" aria-live="polite">Chave PIX copiada!</div>
 
   <!-- Botão global: aparece também durante o vídeo quando o iPhone bloquear o MP3 -->
   <button class="music-unlock" id="musicUnlock" type="button">Ativar música</button>
@@ -206,12 +216,13 @@
         nome: CFG.nome || "Convidado",
         whatsapp: CFG.whatsapp || { numero: "", mensagem: "Olá!" },
         mapa: CFG.mapa || "#",
+        pix: Object.assign({ ativo:false, chave:"", posicao:{left:20,top:65,width:60,height:10} }, CFG.pix || {}),
         telas: Object.assign({
           video:true,
           whatsapp:true,
           localizacao:true,
           presentes:true,
-          dresscode:false,
+          dresscode:true,
           manual:true,
           contagem:true
         }, CFG.telas || {}),
@@ -244,7 +255,7 @@
           corLegenda:"#ffffff",
           posicao:{left:8,top:48,width:84,height:16}
         }, CFG.contagem || {}),
-        musica: Object.assign({ volume:0.30 }, CFG.musica || {})
+        musica: Object.assign({ volume:0.30, volumeVideo:0.20, volumePrincipal:0.60 }, CFG.musica || {})
       };
 
       // Compatibilidade: aceita "contagem" ou "countdown" dentro de hotspots.
@@ -282,6 +293,7 @@
       const hasWhatsapp = !!C.telas.whatsapp;
       const hasMap = !!C.telas.localizacao;
       const hasGift = !!C.telas.presentes;
+      const hasPix = hasGift && !!C.pix.ativo;
       const hasDress = !!C.telas.dresscode;
       const hasManual = !!C.telas.manual;
       const hasCountdown = !!C.telas.contagem;
@@ -290,6 +302,7 @@
         confirm: hasWhatsapp,
         map: hasMap,
         gift: hasGift,
+        pix: hasPix,
         dress: hasDress,
         manual: hasManual,
         countdown: hasCountdown,
@@ -301,12 +314,13 @@
       };
 
       // Hotspots (com override opcional do localStorage, para o editor)
-      const STORAGE_KEY = "convite-hotspots-v1";
+      const STORAGE_KEY = "convite-hotspots-v2:" + location.pathname;
       const $ = (id)=>document.getElementById(id);
       const buttons = {
         confirm: document.getElementById("confirmBtn"),
         map: document.getElementById("mapBtn"),
         gift: document.getElementById("giftBtn"),
+        pix: document.getElementById("pixCopyBtn"),
         dress: document.getElementById("dressBtn"),
         manual: document.getElementById("manualBtn"),
         countdown: document.getElementById("countdownBtn"),
@@ -320,6 +334,7 @@
       Object.entries(C.hotspots || {}).forEach(([key,value])=>{
         if(featureEnabled[key]) HOTSPOTS[key] = JSON.parse(JSON.stringify(value));
       });
+      if(hasPix) HOTSPOTS.pix = JSON.parse(JSON.stringify(C.pix.posicao));
       if(hasCountdown) HOTSPOTS.counter = JSON.parse(JSON.stringify(C.contagem.posicao));
       if(hasGift) HOTSPOTS.backGift = JSON.parse(JSON.stringify((C.botoesVoltar.presentes||{}).posicao || {left:3.7,top:1.5,width:20,height:6}));
       if(hasDress) HOTSPOTS.backDress = JSON.parse(JSON.stringify((C.botoesVoltar.dresscode||{}).posicao || {left:3.7,top:1.5,width:20,height:6}));
@@ -429,28 +444,88 @@
       }
 
       // ---- MÚSICA (desbloqueio no toque, compatível com iPhone) ----------
-      const MUSIC_VOLUME = Math.max(0, Math.min(1, C.musica.volume || 0));
+      const MUSIC_VOLUME = Math.max(0, Math.min(1, C.musica.volume ?? 0.30));
+      const MUSIC_VOLUME_VIDEO = Math.max(0, Math.min(1, C.musica.volumeVideo ?? 0.20));
+      const MUSIC_VOLUME_MAIN = Math.max(0, Math.min(1, C.musica.volumePrincipal ?? C.musica.volume ?? 0.60));
       let musicStarted = false, musicFadeTimer = null;
+
+      // Controle real de volume para Safari/iPhone via Web Audio.
+      // O elemento <audio>.volume sozinho não é confiável no iOS.
+      let musicAudioContext = null, musicSource = null, musicGain = null;
+
+      function ensureMusicAudioGraph(){
+        try{
+          if(!musicAudioContext){
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if(!AC) return false;
+            musicAudioContext = new AC();
+            musicSource = musicAudioContext.createMediaElementSource(music);
+            musicGain = musicAudioContext.createGain();
+            musicSource.connect(musicGain);
+            musicGain.connect(musicAudioContext.destination);
+          }
+          return !!musicGain;
+        }catch(e){
+          return false;
+        }
+      }
+
+      async function resumeMusicAudioContext(){
+        if(ensureMusicAudioGraph() && musicAudioContext.state === "suspended"){
+          try{ await musicAudioContext.resume(); }catch(e){}
+        }
+      }
+
+      function setMusicLevel(value){
+        const v = Math.max(0, Math.min(1, value));
+        if(ensureMusicAudioGraph()){
+          music.volume = 1;
+          musicGain.gain.value = v;
+        }else{
+          music.volume = v;
+        }
+      }
+
+      function currentMusicLevel(){
+        return musicGain ? musicGain.gain.value :
+          (Number.isFinite(music.volume) ? music.volume : 0);
+      }
+
       function fadeMusicTo(target){
         clearInterval(musicFadeTimer);
-        music.volume = Math.min(music.volume || 0.001, target);
+        target = Math.max(0, Math.min(1, target));
+        const step = 0.025;
         musicFadeTimer = setInterval(()=>{
-          music.volume = Math.min(target, (music.volume || 0) + 0.025);
-          if(music.volume >= target) clearInterval(musicFadeTimer);
-        }, 120);
+          const current = currentMusicLevel();
+          if(Math.abs(current - target) <= step){
+            setMusicLevel(target);
+            clearInterval(musicFadeTimer);
+            return;
+          }
+          setMusicLevel(current < target
+            ? Math.min(target, current + step)
+            : Math.max(target, current - step));
+        }, 80);
       }
-      async function startMusic(force){
+
+      function desiredMusicVolume(){
+        return hasVideo && $("videoScreen")?.classList.contains("active")
+          ? MUSIC_VOLUME_VIDEO
+          : MUSIC_VOLUME_MAIN;
+      }
+
+      async function startMusic(force, targetVolume = desiredMusicVolume()){
         try{
-          // Se a música já estiver tocando, mantém a reprodução contínua.
+          await resumeMusicAudioContext();
+
           if(musicStarted && !music.paused){
             document.body.classList.remove("need-music");
+            fadeMusicTo(targetVolume);
             return true;
           }
 
           music.muted = false;
-          // Começa praticamente inaudível para evitar um pico de volume no iPhone
-          // antes de aplicar o volume configurado.
-          music.volume = 0.001;
+          setMusicLevel(targetVolume);
           await music.play();
 
           // Confirma que o navegador realmente iniciou a reprodução.
@@ -461,7 +536,7 @@
 
           musicStarted = true;
           document.body.classList.remove("need-music");
-          fadeMusicTo(MUSIC_VOLUME);
+          fadeMusicTo(targetVolume);
           return true;
         }catch(e){
           musicStarted = false;
@@ -488,9 +563,11 @@
           // Só tenta iniciar novamente se a música realmente estiver parada.
           // Assim ela continua do ponto atual ao sair do vídeo.
           if(!musicStarted || music.paused){
-            startMusic(true).then((ok)=>{
+            startMusic(true, MUSIC_VOLUME_MAIN).then((ok)=>{
               if(!ok) document.body.classList.add("need-music");
             });
+          } else {
+            fadeMusicTo(MUSIC_VOLUME_MAIN);
           }
         };
 
@@ -514,7 +591,7 @@
           video.volume = 1;
 
           // Música e vídeo são solicitados imediatamente no mesmo gesto.
-          const musicPromise = startMusic(false);
+          const musicPromise = startMusic(false, MUSIC_VOLUME_VIDEO);
           const videoPromise = video.play();
 
           Promise.resolve(musicPromise).then((ok)=>{
@@ -527,7 +604,7 @@
               ensureMusicButton();
             });
         } else {
-          startMusic(false).then((ok)=>{
+          startMusic(false, MUSIC_VOLUME_MAIN).then((ok)=>{
             if(!ok) document.body.classList.add("need-music");
           });
           goMain();
@@ -554,7 +631,9 @@
         $("mapBtn").addEventListener("click", (e)=>{
           if(document.body.classList.contains("editor-on")) return;
           e.preventDefault(); e.stopPropagation();
-          window.open(C.mapa || "#", "_blank");
+          // Abre a localização diretamente. Em celulares, links maps.app.goo.gl
+          // podem encaminhar para o app Google Maps quando instalado.
+          if (C.mapa && C.mapa !== "#") window.location.href = C.mapa;
         });
       }
       if(hasGift && $("giftBtn")){
@@ -564,6 +643,29 @@
           show("giftScreen");
         });
         $("backBtn")?.addEventListener("click", ()=> show("mainScreen"));
+      }
+      if(hasPix && $("pixCopyBtn")){
+        $("pixCopyBtn").addEventListener("click", async(e)=>{
+          if(document.body.classList.contains("editor-on")) return;
+          e.preventDefault(); e.stopPropagation();
+          const value = String(C.pix.chave || "");
+          if(!value) return;
+          let copied = false;
+          try{ await navigator.clipboard.writeText(value); copied = true; }
+          catch(err){
+            const ta=document.createElement("textarea");
+            ta.value=value; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+            document.body.appendChild(ta); ta.select();
+            try{ copied = document.execCommand("copy"); }catch(_e){}
+            ta.remove();
+          }
+          if(copied){
+            const toast=$("copyToast");
+            toast?.classList.add("show");
+            clearTimeout(window.__pixToastTimer);
+            window.__pixToastTimer=setTimeout(()=>toast?.classList.remove("show"),1800);
+          }
+        });
       }
       if(hasDress && $("dressBtn")){
         $("dressBtn").addEventListener("click", (e)=>{
@@ -592,11 +694,14 @@
       }
       musicUnlock.addEventListener("click", async()=>{
         document.body.classList.remove("need-music");
-        const ok = await startMusic(true);
+        const target = desiredMusicVolume();
+        const ok = await startMusic(true, target);
         if(!ok) document.body.classList.add("need-music");
       });
       document.addEventListener("visibilitychange", ()=>{
-        if(!document.hidden && musicStarted && music.paused) startMusic(false);
+        if(!document.hidden && musicStarted && music.paused){
+          startMusic(false, desiredMusicVolume());
+        }
       });
 
       // ---- CONTAGEM REGRESSIVA ---------------------------------------------
@@ -658,6 +763,7 @@
         confirm:"WhatsApp",
         map:"Localização",
         gift:"Presentes",
+        pix:"PIX (copiar chave)",
         dress:"Dress Code",
         manual:"Manual do Convidado",
         countdown:"Contagem (botão)",
@@ -682,7 +788,7 @@
 
       function editorScreenFor(key){
         if(key === "counter" || key === "backCountdown") return "countdownScreen";
-        if(key === "backGift") return "giftScreen";
+        if(key === "pix" || key === "backGift") return "giftScreen";
         if(key === "backDress") return "dressScreen";
         if(key === "backManual") return "manualScreen";
         return "mainScreen";
@@ -775,17 +881,16 @@
 
       Object.entries(buttons).forEach(([key,el])=>{
         if(!el) return;
-        if(key === "counter"){
+        if(!el.querySelector(".resize")){
           const resizeHandle = document.createElement("span");
           resizeHandle.className = "resize";
           el.appendChild(resizeHandle);
-        } else {
-          el.innerHTML = '<span class="resize"></span>';
         }
         el.addEventListener("pointerdown", e=>{
           if(!document.body.classList.contains("editor-on")) return;
           e.preventDefault(); e.stopPropagation(); selectArea(key);
           const stageEl = key === "counter" ? $("countdownStage") :
+            key === "pix" ? $("giftStage") :
             key === "backGift" ? $("giftStage") :
             key === "backDress" ? $("dressStage") :
             key === "backManual" ? $("manualStage") :
@@ -820,7 +925,8 @@
         Object.entries(C.hotspots || {}).forEach(([key,value])=>{
           if(featureEnabled[key]) HOTSPOTS[key] = JSON.parse(JSON.stringify(value));
         });
-        if(hasCountdown) HOTSPOTS.counter = JSON.parse(JSON.stringify(C.contagem.posicao));
+        if(hasPix) HOTSPOTS.pix = JSON.parse(JSON.stringify(C.pix.posicao));
+      if(hasCountdown) HOTSPOTS.counter = JSON.parse(JSON.stringify(C.contagem.posicao));
       if(hasGift) HOTSPOTS.backGift = JSON.parse(JSON.stringify((C.botoesVoltar.presentes||{}).posicao || {left:3.7,top:1.5,width:20,height:6}));
       if(hasDress) HOTSPOTS.backDress = JSON.parse(JSON.stringify((C.botoesVoltar.dresscode||{}).posicao || {left:3.7,top:1.5,width:20,height:6}));
       if(hasManual) HOTSPOTS.backManual = JSON.parse(JSON.stringify((C.botoesVoltar.manual||{}).posicao || {left:3.7,top:1.5,width:20,height:6}));
@@ -831,7 +937,7 @@
       // Gera código pronto para colar dentro de CONFIG.hotspots no config.js
       function exportAreas(){
         const indent = "    ";
-        const buttonEntries = Object.entries(HOTSPOTS).filter(([k])=>k !== "counter" && !k.startsWith("back"));
+        const buttonEntries = Object.entries(HOTSPOTS).filter(([k])=>k !== "counter" && k !== "pix" && !k.startsWith("back"));
         const lines = buttonEntries.map(([k,v])=>{
           return indent + indent + k + ": { left:" + v.left + ", top:" + v.top + ", width:" + v.width + ", height:" + v.height + " }";
         }).join(",\n");
@@ -842,6 +948,12 @@
           (hasManual ? "    manual: { mostrarTexto:"+backTextConfig.backManual+", posicao: "+JSON.stringify(HOTSPOTS.backManual)+" },\n" : "") +
           (hasCountdown ? "    contagem: { mostrarTexto:"+backTextConfig.backCountdown+", posicao: "+JSON.stringify(HOTSPOTS.backCountdown)+" }\n" : "") +
           "  },";
+        const pixCode = hasPix && HOTSPOTS.pix ?
+          "\n\npix: {\n" +
+          "    ativo: true,\n" +
+          "    chave: " + JSON.stringify(String(C.pix.chave || "")) + ",\n" +
+          "    posicao: " + JSON.stringify(HOTSPOTS.pix) + "\n" +
+          "  }," : "";
         const countdownCode = hasCountdown && c ?
           "\n\ncontagem: {\n" +
           "    dataEvento: \"" + C.contagem.dataEvento + "\",\n" +
@@ -850,7 +962,7 @@
           "    corLegenda: \"" + C.contagem.corLegenda + "\",\n" +
           "    posicao: { left:" + c.left + ", top:" + c.top + ", width:" + c.width + ", height:" + c.height + " }\n" +
           "  }" : "";
-        $("exportBox").value = "hotspots: {\n" + lines + "\n  }," + backCode + countdownCode;
+        $("exportBox").value = "hotspots: {\n" + lines + "\n  }," + pixCode + backCode + countdownCode;
         /* legacy export removed */
         return;
         $("exportBox").value =
