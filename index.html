@@ -95,7 +95,9 @@
   bottom:auto;
   z-index:50;
   max-width:560px;
-  margin:auto;
+  margin:0 12px 0 auto;
+  max-height:calc(100dvh - 24px);
+  overflow:auto;
   background:rgba(255,255,255,.94);
   color:#4b2634;
   border-radius:18px;
@@ -375,8 +377,18 @@
           const el=buttons[key]; if(!el) return;
           el.classList.toggle("text-hidden", !backTextConfig[key]);
           el.setAttribute("aria-label", C.textos.voltar);
-          el.textContent = backTextConfig[key] ? C.textos.voltar : "";
-          if(document.body.classList.contains("editor-on") && !el.querySelector(".resize")){ const r=document.createElement("span"); r.className="resize"; el.appendChild(r); }
+          // Preserve o controle de redimensionamento ao atualizar a posição.
+          // textContent apagava a bolinha a cada movimento, impedindo redimensionar.
+          let label = el.querySelector(".back-label");
+          if(!label){
+            label = document.createElement("span");
+            label.className = "back-label";
+            el.prepend(label);
+          }
+          label.textContent = backTextConfig[key] ? C.textos.voltar : "";
+          if(document.body.classList.contains("editor-on") && !el.querySelector(".resize")){
+            const r=document.createElement("span"); r.className="resize"; el.appendChild(r);
+          }
         });
       }
 
@@ -818,7 +830,7 @@
         editorPanel.style.right = "12px";
         editorPanel.style.top = "12px";
         editorPanel.style.bottom = "auto";
-        editorPanel.style.margin = "auto";
+        editorPanel.style.margin = "0 auto";
       }
 
       editorDragHandle?.addEventListener("pointerdown", (e)=>{
@@ -850,7 +862,12 @@
         }
       });
 
-      function openEditor(){ show(editorScreenFor(selected)); document.body.classList.add("editor-on","can-edit"); selectArea(selected); }
+      function openEditor(){
+        document.body.classList.add("editor-on","can-edit");
+        const first = areaSelect.options.length ? areaSelect.options[0].value : "confirm";
+        if(!HOTSPOTS[selected] || !featureEnabled[selected]) selected = first;
+        selectArea(selected);
+      }
       function closeEditor(){ document.body.classList.remove("editor-on"); }
       $("editOpen").addEventListener("click", openEditor);
       $("closeEditor").addEventListener("click", closeEditor);
@@ -861,7 +878,7 @@
         if(!HOTSPOTS[key] || !featureEnabled[key]) return;
         selected = key; $("areaSelect").value = key;
         if(document.body.classList.contains("editor-on")) show(editorScreenFor(key));
-        Object.values(buttons).forEach(b=>b.classList.remove("selected"));
+        Object.values(buttons).forEach(b=>{ if(b) b.classList.remove("selected"); });
         if(buttons[key]) buttons[key].classList.add("selected");
         const isBack = key.startsWith("back");
         $("backTextRow").style.display = isBack ? "flex" : "none";
@@ -910,8 +927,15 @@
             }
             applyHotspots(); fillInputs();
           }
-          function up(){ el.removeEventListener("pointermove",move); el.removeEventListener("pointerup",up); }
-          el.addEventListener("pointermove",move); el.addEventListener("pointerup",up);
+          function up(){
+            el.removeEventListener("pointermove",move);
+            el.removeEventListener("pointerup",up);
+            el.removeEventListener("pointercancel",up);
+            try { if(el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId); } catch(_){}
+          }
+          el.addEventListener("pointermove",move);
+          el.addEventListener("pointerup",up);
+          el.addEventListener("pointercancel",up);
         });
       });
 
