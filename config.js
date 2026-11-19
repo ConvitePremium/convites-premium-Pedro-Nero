@@ -23,15 +23,15 @@ window.CONFIG = {
   // ----- IDENTIDADE DO CONVITE -------------------------------------------
   // Nome do aniversariante. Aparece no título da aba do navegador e nos
   // textos automáticos do convite.
-  nome: "Julia",
+  nome: "Pedro Nero",
 
   // ----- WHATSAPP (CONFIRMAR PRESENÇA) -----------------------------------
   // numero: DDI + DDD + número, SÓ DÍGITOS (sem +, espaço, parênteses ou traço).
   //         Ex.: 55 (Brasil) + 31 (DDD) + 985657116 -> "5531985657116"
   // mensagem: texto que já vem pré-preenchido quando a pessoa abre o WhatsApp.
   whatsapp: {
-    numero: "5554996710374",
-    mensagem: "Olá! Confirmo minha presença no aniversário da Julia."
+    numero: "5588994897535",
+    mensagem: "Olá! Confirmo minha presença no aniversário do Pedro Nero."
   },
 
   // ----- LOCALIZAÇÃO (BOTÃO MAPA) ----------------------------------------
@@ -48,9 +48,9 @@ window.CONFIG = {
     video: true,
     whatsapp: true,
     localizacao: true,
-    presentes: false,
+    presentes: true,
     dresscode: false,
-    manual: false,
+    manual: true,
     contagem: true
   },
 
@@ -115,7 +115,7 @@ window.CONFIG = {
     corNumero: "#ffffff",
     corLegenda: "#ffffff",
     posicao: { left:19.245990789736418, top:60.6582320155903, width:61.9169422673722, height:5.413117834986822 }
-  }
+  },
 
   // ----- MÚSICA DE FUNDO -------------------------------------------------
   // Volumes independentes: durante o vídeo e depois, no convite principal.
