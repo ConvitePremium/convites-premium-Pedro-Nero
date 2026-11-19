@@ -96,10 +96,12 @@ window.CONFIG = {
   // use o editor (?editor=1) e cole o resultado aqui.
   //   left/top: canto superior esquerdo do botão
   //   width/height: tamanho do botão
-    hotspots: {
-        confirm: { left:24.63179157028827, top:59.31527829945895, width:19.848007245447285, height:13.290442633933843 },
-        map: { left:53.98632232024703, top:59.20017871325856, width:20.51931482436097, height:13.241063160224506 },
-        countdown: { left:45.60442228622221, top:76.10538412685636, width:20.589441268969647, height:12.095719255916219 }
+  hotspots: {
+    confirm:   { left: 11.2, top: 58.3, width: 24.0, height: 15.8 },
+    map:       { left: 37.4, top: 58.3, width: 24.0, height: 15.8 },
+    gift:      { left: 63.5, top: 58.3, width: 24.0, height: 15.8 },
+    manual:    { left: 24.0, top: 74.4, width: 24.0, height: 15.3 },
+    countdown: { left: 50.0, top: 74.4, width: 24.0, height: 15.3 }
   },
 
   // ----- CONTAGEM REGRESSIVA ---------------------------------------------
@@ -110,7 +112,7 @@ window.CONFIG = {
   // corLegenda altera a cor de Meses, Dias, Horas, Min e Seg.
   // Aceita hexadecimal, nome de cor ou rgb().
   contagem: {
-    dataEvento: "2026-11-21T15:00:00",
+    dataEvento: "2026-09-07T17:30:00",
     textoFinal: "A festa começou!",
     corNumero: "#ffffff",
     corLegenda: "#ffffff",

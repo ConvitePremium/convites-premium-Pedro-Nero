@@ -13,23 +13,23 @@
        link do repositório (URL_BASE abaixo). O resto da engine é automático.
        ==================================================================== -->
   <meta name="theme-color" content="#f6c1cd">
-  <title>Convite 1 aninho Julia</title>
+  <title>Convite de 1 aninho — Pedro Nero</title>
 
   <!-- Cole aqui a URL base do convite publicado no GitHub Pages -->
   <!-- Ex.: https://convitepremium.github.io/convite-premium-Joao/ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Convite 1 aninho Julia">
+  <meta property="og:title" content="Convite de 1 aninho — Pedro Nero">
   <meta property="og:description" content="Clique para abrir o convite">
-  <meta property="og:url" content="https://convitepremium.github.io/convites-premium-Julia-1ano/">
-  <meta property="og:image" content="https://convitepremium.github.io/convites-premium-Julia-1ano/assets/preview-whatsapp.jpg">
-  <meta property="og:image:secure_url" content="https://convitepremium.github.io/convites-premium-Julia-1ano/assets/preview-whatsapp.jpg">
+  <meta property="og:url" content="https://convitespremium2022.github.io/convites-premium-Pedro-Nero/">
+  <meta property="og:image" content="https://convitespremium2022.github.io/convites-premium-Pedro-Nero/assets/preview-whatsapp.jpg">
+  <meta property="og:image:secure_url" content="https://convitespremium2022.github.io/convites-premium-Pedro-Nero/assets/preview-whatsapp.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Convite 1 aninho Julia">
+  <meta name="twitter:title" content="Convite de 1 aninho — Pedro Nero">
   <meta name="twitter:description" content="Clique para abrir o convite">
-  <meta name="twitter:image" content="https://convitepremium.github.io/convites-premium-Julia-1ano/assets/preview-whatsapp.jpg">
+  <meta name="twitter:image" content="https://convitespremium2022.github.io/convites-premium-Pedro-Nero/assets/preview-whatsapp.jpg">
   <!-- Fim do bloco de preview -->
 
   <link rel="preload" href="assets/opening.webp" as="image">
@@ -129,7 +129,6 @@
         <button class="hotspot" id="confirmBtn" data-key="confirm" data-label="WhatsApp" aria-label="Confirmar presença"></button>
         <button class="hotspot" id="mapBtn" data-key="map" data-label="Localização" aria-label="Abrir localização"></button>
         <button class="hotspot" id="giftBtn" data-key="gift" data-label="Presentes" aria-label="Ver sugestões de presentes"></button>
-        <button class="hotspot" id="dressBtn" data-key="dress" data-label="Dress Code" aria-label="Ver dress code"></button>
         <button class="hotspot" id="manualBtn" data-key="manual" data-label="Manual do Convidado" aria-label="Ver manual do convidado"></button>
         <button class="hotspot" id="countdownBtn" data-key="countdown" data-label="Contagem" aria-label="Ver contagem regressiva"></button>
       </div>
@@ -205,7 +204,7 @@
   <audio id="music" src="assets/musica.mp3" preload="auto" loop></audio>
 
   <!-- config.js DEVE carregar antes da engine -->
-  <script src="config.js"></script>
+  <script src="config.js?v=pedro-nero-5-areas"></script>
   <script>
     /* ========================================================================
        ENGINE V4 MODULAR — lê tudo de config.js. Não edite por convite.
@@ -294,7 +293,7 @@
       const hasMap = !!C.telas.localizacao;
       const hasGift = !!C.telas.presentes;
       const hasPix = hasGift && !!C.pix.ativo;
-      const hasDress = !!C.telas.dresscode;
+      const hasDress = false; // Pedro Nero: apenas cinco áreas na tela principal
       const hasManual = !!C.telas.manual;
       const hasCountdown = !!C.telas.contagem;
 
@@ -314,7 +313,7 @@
       };
 
       // Hotspots (com override opcional do localStorage, para o editor)
-      const STORAGE_KEY = "convite-hotspots-v2:" + location.pathname;
+      const STORAGE_KEY = "convite-hotspots-pedro-nero-v1:" + location.pathname;
       const $ = (id)=>document.getElementById(id);
       const buttons = {
         confirm: document.getElementById("confirmBtn"),
