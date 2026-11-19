@@ -77,6 +77,7 @@
     .fade-out{animation:fadeOut .75s ease forwards}.fade-in{animation:fadeIn .75s ease forwards}
     @keyframes pulse{0%,100%{transform:translateX(-50%) scale(1);opacity:.88}50%{transform:translateX(-50%) scale(1.035);opacity:1}}
     @keyframes fadeOut{to{opacity:0;filter:blur(8px)}}@keyframes fadeIn{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:blur(0)}}
+    body.editor-on .hotspot,body.editor-on .back,body.editor-on .countdown-box,body.editor-on .pix-copy{touch-action:none;user-select:none}
     body.editor-on .hotspot{background:rgba(255,70,120,.22);outline:2px solid rgba(255,255,255,.9);border-radius:10px}
     body.editor-on .hotspot::after{content:attr(data-label);position:absolute;left:6px;top:6px;background:#fff;color:#7b3650;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;box-shadow:0 2px 8px #0004;white-space:nowrap}
     body.editor-on .hotspot.selected{background:rgba(50,180,255,.28);outline:3px solid #fff}
@@ -386,9 +387,7 @@
             el.prepend(label);
           }
           label.textContent = backTextConfig[key] ? C.textos.voltar : "";
-          if(document.body.classList.contains("editor-on") && !el.querySelector(".resize")){
-            const r=document.createElement("span"); r.className="resize"; el.appendChild(r);
-          }
+
         });
       }
 
@@ -400,7 +399,6 @@
         });
         applyBackText();
         updateCountdownScale();
-        exportAreas();
       }
 
       function updateCountdownScale(){
@@ -867,6 +865,7 @@
         const first = areaSelect.options.length ? areaSelect.options[0].value : "confirm";
         if(!HOTSPOTS[selected] || !featureEnabled[selected]) selected = first;
         selectArea(selected);
+        exportAreas();
       }
       function closeEditor(){ document.body.classList.remove("editor-on"); }
       $("editOpen").addEventListener("click", openEditor);
@@ -892,7 +891,7 @@
       }
       ["inpL","inpT","inpW","inpH"].forEach(id=>$(id).addEventListener("input",()=>{
         HOTSPOTS[selected] = {left:+$("inpL").value, top:+$("inpT").value, width:+$("inpW").value, height:+$("inpH").value};
-        applyHotspots();
+        applyHotspots(); exportAreas();
       }));
 
       Object.entries(buttons).forEach(([key,el])=>{
@@ -913,7 +912,7 @@
             key === "backCountdown" ? $("countdownStage") : $("mainStage");
           const stage = stageEl.getBoundingClientRect();
           const start = Object.assign({x:e.clientX, y:e.clientY}, HOTSPOTS[key]);
-          const resize = e.target.classList.contains("resize");
+          const resize = !!e.target.closest(".resize");
           el.setPointerCapture(e.pointerId);
           function move(ev){
             const dx = (ev.clientX-start.x)/stage.width*100;
@@ -925,7 +924,7 @@
               HOTSPOTS[key].left = Math.max(0, Math.min(100-start.width,  start.left+dx));
               HOTSPOTS[key].top  = Math.max(0, Math.min(100-start.height, start.top+dy));
             }
-            applyHotspots(); fillInputs();
+            applyHotspots(); fillInputs(); exportAreas();
           }
           function up(){
             el.removeEventListener("pointermove",move);
@@ -955,7 +954,7 @@
       if(hasManual) HOTSPOTS.backManual = JSON.parse(JSON.stringify((C.botoesVoltar.manual||{}).posicao || {left:3.7,top:1.5,width:20,height:6}));
       if(hasCountdown) HOTSPOTS.backCountdown = JSON.parse(JSON.stringify((C.botoesVoltar.contagem||{}).posicao || {left:3.7,top:1.5,width:20,height:6}));
         localStorage.removeItem(STORAGE_KEY);
-        applyHotspots(); fillInputs();
+        applyHotspots(); fillInputs(); exportAreas();
       });
       // Gera código pronto para colar dentro de CONFIG.hotspots no config.js
       function exportAreas(){
@@ -986,17 +985,7 @@
           "    posicao: { left:" + c.left + ", top:" + c.top + ", width:" + c.width + ", height:" + c.height + " }\n" +
           "  }" : "";
         $("exportBox").value = "hotspots: {\n" + lines + "\n  }," + pixCode + backCode + countdownCode;
-        /* legacy export removed */
         return;
-        $("exportBox").value =
-          "hotspots: {\n" + lines + "\n  },\n\n" +
-          "contagem: {\n" +
-          "    dataEvento: \"" + C.contagem.dataEvento + "\",\n" +
-          "    textoFinal: \"" + String(C.contagem.textoFinal || "").replace(/\"/g,'\\\"') + "\",\n" +
-          "    corNumero: \"" + C.contagem.corNumero + "\",\n" +
-          "    corLegenda: \"" + C.contagem.corLegenda + "\",\n" +
-          "    posicao: { left:" + c.left + ", top:" + c.top + ", width:" + c.width + ", height:" + c.height + " }\n" +
-          "  }";
       }
       $("copyAreas").addEventListener("click", async()=>{
         exportAreas(); $("exportBox").select();
